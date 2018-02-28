@@ -12,9 +12,10 @@ import requests
 import time
 import urllib
 
+# er =14440,16645,18219　エラー
+er = 18220 #前回中断した所　ループが途中で切れた
 
-
-for page in range(1,25800+1):
+for page in range(er,25800+1):
     print(page)
     url = "https://erogamescape.dyndns.org/~ap2/ero/toukei_kaiseki/game.php?game="
     url = url + str(page)
