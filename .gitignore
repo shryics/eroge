@@ -4,6 +4,8 @@ hero/
 main/
 sub/
 ImgProcessing/etc/
+ImgProcessing/face_main_resize/
+ImgProcessing/face_sub_resize/
 ImgProcessing/face_main/
 ImgProcessing/face_sub/
 ImgProcessing/hero/

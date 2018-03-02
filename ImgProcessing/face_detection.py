@@ -3,12 +3,13 @@ import cv2
 # Haar-like特徴分類器の読み込み
 face_cascade = cv2.CascadeClassifier('../data/lbpcascade_animeface.xml')
 
-chara_posi = 'main' # main or sub
+chara_posi = 'sub' # main or sub
 if chara_posi == "main":
     num = 14970 #main のファイル数
 elif chara_posi == "sub":
     num = 2638 #sub のファイル数
 
+c = 0 # 顔検出できなかった画像数
 for i in range(num):
     # イメージファイルの読み込み
     img = cv2.imread( str(chara_posi) + '/_ ('+str(i+1)+').jpg')
@@ -27,4 +28,6 @@ for i in range(num):
             # 顔の中から目を検知
             face = img[y:y+h, x:x+w]
         # 画像保存
-        cv2.imwrite('face_' + str(chara_posi) + '/'+str(i+1)+'.jpg', face)
+        cv2.imwrite('face_' + str(chara_posi) + '/'+str(i+1-c)+'.jpg', face)
+    else:
+        c += 1
