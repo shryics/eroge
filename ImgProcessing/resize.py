@@ -13,6 +13,7 @@ def GetFileNum(sInFdr):
 #  顔検出数: main 14094, sub 2164
 #  最小ピクセル: main 26, sub 31
 
+
 chara_posis = ['main', 'sub'] # main or sub
 # ---histgram を取得 -> 50が良いっぽい---
 
