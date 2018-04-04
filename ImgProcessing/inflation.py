@@ -59,7 +59,8 @@ def GetFileNum(sInFdr):
 
 if __name__ == '__main__':
 
-    for k in range(1, GetFileNum("face_"+str("main")+"_resize/") + 1 ): # k個目の画像
+    position = "sub" # main or sub
+    for k in range(1, GetFileNum("face_"+str(position)+"_resize/") + 1 ): # k個目の画像
 
         # ルックアップテーブルの生成
         min_table = 50
@@ -100,7 +101,7 @@ if __name__ == '__main__':
         LUTs.append(LUT_G2)
 
         # 画像の読み込み
-        img_src = cv2.imread("face_"+str("main")+"_resize/"+str(k) +".jpg", 1)
+        img_src = cv2.imread("face_"+str(position)+"_resize/"+str(k) +".jpg", 1)
         trans_img = []
         trans_img.append(img_src)
 
@@ -125,12 +126,12 @@ if __name__ == '__main__':
         trans_img.extend(flip_img)
 
         # 保存
-        if not os.path.exists("face_"+"main"+"_inflation"):
-            os.mkdir("face_"+"main"+"_inflation")
+        if not os.path.exists("face_"+position+"_inflation"):
+            os.mkdir("face_"+position+"_inflation")
 
-        base =  os.path.splitext(os.path.basename("face_"+str("main")+"_resize/"+str(k) +".jpg"))[0] + "_"
+        base =  os.path.splitext(os.path.basename("face_"+str(position)+"_resize/"+str(k) +".jpg"))[0] + "_"
         img_src.astype(np.float64)
         for i, img in enumerate(trans_img):
             # 比較用
             # cv2.imwrite("trans_images/" + base + str(i) + ".jpg" ,cv2.hconcat([img_src.astype(np.float64), img.astype(np.float64)]))
-            cv2.imwrite("face_"+"main"+"_inflation/" + base + str(i) + ".jpg" ,img)
+            cv2.imwrite("face_"+position+"_inflation/" + base + str(i) + ".jpg" ,img)
