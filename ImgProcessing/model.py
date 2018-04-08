@@ -25,7 +25,7 @@ label = []
 
 for chara_posi in chara_posis:
     for i in range(2164):
-        image = cv2.imread("face_"+str(chara_posi)+"_resize/"+str(i+1)+".jpg")
+        image = cv2.imread("face_"+str(chara_posi)+"_inflation/"+str(i+1)+".jpg")
         mms = MinMaxScaler()
         image = image.reshape(-1,).astype(np.float64)
         image_normalize = mms.fit_transform(image)
@@ -49,5 +49,5 @@ xgb_model.fit(np.array(data),np.array(label))
 
 
 # モデル保存
-filename = 'model_xgb.jlib'
+filename = 'model_xgb_infla.jlib'
 joblib.dump(xgb_model, filename)
