@@ -22,8 +22,8 @@ data = []
 label = []
 chara_posi = 'main' # main
 
-for i in range(2164,GetFileNum("face_"+str(chara_posi)+"_resize/")):
-    image = cv2.imread("face_"+str(chara_posi)+"_resize/"+str(i+1)+".jpg")
+for i in range(38952,GetFileNum("face_main_inflation/")):
+    image = cv2.imread("face_main_inflation/1 ("+str(i+1)+").jpg")
     mms = MinMaxScaler()
     image = image.reshape(-1,).astype(np.float64)
     image_normalize = mms.fit_transform(image)
@@ -37,9 +37,9 @@ for i in range(2164,GetFileNum("face_"+str(chara_posi)+"_resize/")):
 
 
 # モデルをロードする
-filename = 'model_xgb.jlib'
+filename = 'model_SVM.jlib'
 model = joblib.load(filename)
-result = xgb_model.predict(data)
+result = model.predict(data)
 
 # 精度算出
 c = 0
@@ -51,3 +51,5 @@ print(c/len(result))
 
 # svm : 0.5172673931265717
 # xgb : 0.5123218776194468
+
+# svm(added filtered images) : 0.23695631926981467

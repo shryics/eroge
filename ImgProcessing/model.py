@@ -16,16 +16,17 @@ def GetFileNum(sInFdr):
         i+=len(files)
     return i
 
-# 画像を読み込み
-# データ数 main,sub共にデータ数をあわせる(2164枚)
-chara_posis = ['main', 'sub'] # main or sub
 
+
+# 画像を読み込み
+# データ数 main, sub共にデータ数をあわせる(38952枚)
+chara_posis = ['main', 'sub'] # main or sub
 data = []
 label = []
 
 for chara_posi in chara_posis:
-    for i in range(2164):
-        image = cv2.imread("face_"+str(chara_posi)+"_inflation/"+str(i+1)+".jpg")
+    for i in range(38952):
+        image = cv2.imread("face_"+str(chara_posi)+"_inflation/1 ("+str(i+1)+").jpg")
         mms = MinMaxScaler()
         image = image.reshape(-1,).astype(np.float64)
         image_normalize = mms.fit_transform(image)
@@ -33,21 +34,19 @@ for chara_posi in chara_posis:
         # 前処理(データ拡張?とかは今回スキップ)
 
         # 画像を2次元リストへ変換
-
         if chara_posi == "main":
             label.append(1)
         else:
             label.append(0)
         data.append(image_normalize)
 
-
 # 学習
-#clf = svm.LinearSVC()
-#clf.fit(data,label)
-xgb_model = xgb.XGBClassifier()
-xgb_model.fit(np.array(data),np.array(label))
+clf = svm.LinearSVC()
+clf.fit(data,label)
+# xgb_model = xgb.XGBClassifier()
+# xgb_model.fit(np.array(data),np.array(label))
 
 
 # モデル保存
-filename = 'model_xgb_infla.jlib'
-joblib.dump(xgb_model, filename)
+filename = 'model_SVM.jlib'
+joblib.dump(clf, filename)
